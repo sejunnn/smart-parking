@@ -7,8 +7,8 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center; /* 전체 콘텐츠를 수평 중앙 정렬 */
-  align-items: center;   /* ⭐ 전체 콘텐츠를 수직 중앙 정렬 (이전: flex-start) */
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
 }
 
@@ -17,14 +17,13 @@ body {
   width: 100%;
   padding: 0 20px;
   box-sizing: border-box;
-  margin-top: 0; /* ⭐ 상단 마진을 0으로 제거 */
-  /* margin: auto; /* ⭐ 상하좌우 자동 마진으로 완벽한 중앙 정렬 시도 (선택 사항) */
+  margin-top: 0;
 }
 
 .header {
   padding-bottom: 20px;
   border-bottom: none;
-  margin-bottom: 25px;
+  margin-bottom: 15px; /* ⭐ 이 값을 25px에서 15px로 줄였습니다. 더 줄이거나 늘릴 수 있습니다. */
 }
 
 .brand {
@@ -70,7 +69,7 @@ h2 {
 }
 
 .zone-wrapper {
-  margin-top: 0;
+  margin-top: 0; /* 이 부분은 0으로 유지합니다. */
 }
 
 .row {
