@@ -4,10 +4,7 @@ function updateTime() {
   const now = new Date();
   const hour = now.getHours().toString().padStart(2, '0');
   const min = now.getMinutes().toString().padStart(2, '0');
-  
-  // '오늘' 뒤와 '기준' 앞에 공백을 추가하도록 수정
-  document.getElementById("time-now").textContent = `${hour}:${min}`; // 시간만 표시하도록 하고
-  // index.html에서 '오늘'과 '기준'을 별도로 처리하여 공백을 제어
+  document.getElementById("time-now").textContent = hour + ":" + min;
 }
 
 // status.json에서 데이터를 가져와 표시하는 함수
@@ -49,6 +46,8 @@ async function loadRealTimeData() {
         }
       }
 
+      // Figma 코드의 레이아웃과 유사하도록 HTML 구조 변경
+      // 아이콘을 위한 <span> 태그 안에 <img>를 넣도록 변경
       div.innerHTML = `
         <h5 class="zone-number">구역${z.zone}</h5>
         <h5 class="status-text">${z.status} <span class="icon">${statusIcon(getZoneStateClass(z.status, z.charging))}</span></h5>
@@ -76,13 +75,14 @@ function getZoneStateClass(status, charging) {
 // 이모지 대신 이미지 태그를 반환하도록 수정
 function statusIcon(stateClass) {
   if (stateClass === "charging") {
-    return '<img src="images/cg.png" alt="충전중" class="status-img-icon">';
+    return '<img src="images/cg.svg" alt="충전중" class="status-img-icon">';
   }
   if (stateClass === "available") {
-    return '<img src="images/co.png" alt="충전가능" class="status-img-icon">';
+    return '<img src="images/co.svg" alt="충전가능" class="status-img-icon">';
   }
   if (stateClass === "waiting") {
-    return ''; // 대기중 아이콘 없음
+    // 대기중 상태에 대한 아이콘 파일이 없다면, 빈 문자열 또는 다른 기본 아이콘을 반환
+    return ''; // 또는 '<img src="images/waiting.png" alt="대기중" class="status-img-icon">';
   }
   return '';
 }
@@ -97,3 +97,6 @@ document.getElementById("refresh-button").addEventListener("click", function(eve
   updateTime();
   loadRealTimeData();
 });
+
+// 데이터를 주기적으로 업데이트하려면 다음 줄의 주석을 해제하세요.
+// setInterval(loadRealTimeData, 30000);
