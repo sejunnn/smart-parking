@@ -11,7 +11,7 @@ async function loadStatus() {
                     zone.status === "대기중" ? "warning" : "secondary";
 
       const box = document.createElement("div");
-      box.className = "col-md-6 col-lg-4";
+      box.className = "";
       box.innerHTML = `
         <div class="zone-box border-start border-4 border-${color}">
           <h4><i class="fa-solid fa-car me-2"></i>구역 ${zone.zone}</h4>

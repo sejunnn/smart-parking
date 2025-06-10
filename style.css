@@ -12,7 +12,8 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   padding: 20px;
-  margin-bottom: 20px;
+  width: 90%;
+  max-width: 420px;
   animation: fadeIn 0.6s ease-in-out;
 }
 .zone-box h4 {
@@ -21,9 +22,6 @@ body {
 }
 .pulse {
   animation: pulse 1.5s infinite;
-}
-.qr-section {
-  background-color: #2F4F4F;
 }
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 rgba(64, 224, 208, 0.7); }
