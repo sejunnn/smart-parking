@@ -5,7 +5,8 @@
       "status": "충전중",
       "battery": 62,
       "charging": true,
-      "lastUsedHoursAgo": 0
+      "lastUsedHoursAgo": 0,
+      "timeElapsed": 30
     },
     {
       "zone": 2,
