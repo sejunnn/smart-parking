@@ -15,15 +15,15 @@ body {
 .container {
   max-width: 414px;
   width: 100%;
-  padding: 20px 20px 0 20px; /* 맨 위에서 "한양 전기차 충전소"까지의 마진 조절 */
+  padding: 20px 20px 0 20px; /* 맨 위에서 "한양 전기차 충전소"까지의 마진 조절 (유지) */
   box-sizing: border-box;
   margin-top: 0;
 }
 
 .header {
-  padding-bottom: 0; /* padding-bottom도 0으로 설정하여 간섭 제거 */
+  padding-bottom: 0; /* padding-bottom 0 유지 */
   border-bottom: none;
-  margin-bottom: 0; /* ⭐ header의 하단 마진을 0으로 설정 */
+  margin-bottom: 0; /* header의 하단 마진 0 유지 */
 }
 
 .brand {
@@ -48,7 +48,7 @@ h2 {
   font-weight: 700;
   line-height: 48px;
   margin-top: 0;
-  margin-bottom: 10px; /* ⭐ h2 아래에 직접 마진을 추가했습니다. 이 값을 조절하세요. */
+  margin-bottom: 5px; /* ⭐ 이 값을 10px에서 5px로 줄였습니다. 더 줄이려면 0px로 변경하세요. */
 }
 
 .timestamp {
@@ -70,7 +70,7 @@ h2 {
 }
 
 .zone-wrapper {
-  margin-top: 0; /* 이 부분은 0으로 유지 */
+  margin-top: 0; /* 유지 */
 }
 
 .row {
