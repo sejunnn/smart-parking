@@ -1,12 +1,111 @@
+:root {
+  --primary-turquoise: #40E0D0;
+  --secondary-turquoise: #20B2AA;
+  --dark-turquoise: #00CED1;
+  --light-turquoise: #AFEEEE;
+  --dark-blue: #2F4F4F;
+}
+
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, var(--light-turquoise), var(--primary-turquoise)); /* 배경 그라데이션 */
+  color: var(--dark-blue); /* 기본 텍스트 색상 */
+  line-height: 1.6;
 }
-.zone-box {
-  border-radius: 8px;
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
   padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
-.zone-box h4 {
-  margin-bottom: 10px;
+
+/* 헤더/네비게이션 바 스타일 (예시) */
+header {
+  background-color: var(--primary-turquoise); /* 메인 브랜드 색상 */
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+header h1 {
+  margin: 0;
+  color: white;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: var(--dark-blue); /* 호버 시 텍스트 색상 변경 */
+}
+
+/* 섹션 타이틀 */
+h2 {
+  color: var(--dark-blue); /* 텍스트 색상 */
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+/* 버튼 스타일 */
+.button {
+  display: inline-block;
+  background-color: var(--dark-turquoise); /* 액센트 색상 */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--secondary-turquoise); /* 보조 색상 */
+}
+
+/* 주차 공간 카드 또는 목록 아이템 (예시) */
+.parking-spot {
+  background-color: white;
+  border: 1px solid var(--secondary-turquoise);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.parking-spot h3 {
+  color: var(--dark-blue);
+  margin-top: 0;
+}
+
+.parking-spot p {
+  color: var(--dark-blue);
+}
+
+/* 푸터 스타일 */
+footer {
+  background-color: var(--dark-blue); /* 텍스트 색상 */
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 40px;
 }
