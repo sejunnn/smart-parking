@@ -19,38 +19,42 @@ async function loadRealTimeData() {
     wrapper.innerHTML = ""; // 기존 목업 데이터 지우기
 
     zones.forEach(z => {
-      const div = document.createElement("div");
-      let stateClass = "";
-      let desc1 = ""; // 첫 번째 설명줄
-      let desc2 = ""; // 두 번째 설명줄
+      // col-6 클래스를 추가하여 2열 그리드에 맞춤
+      const colDiv = document.createElement("div");
+      colDiv.className = "col-6";
 
-      // status.json의 데이터를 기반으로 상태 및 설명 설정
+      const div = document.createElement("div");
+      div.className = "zone-box " + getZoneStateClass(z.status, z.charging); // 상태에 따른 클래스 결정 함수 호출
+      
+      let desc1 = "";
+      let desc2 = "";
+
+      // 상태에 따른 desc1, desc2 설정
       if (z.charging) {
-        stateClass = "charging";
-        if (z.timeElapsed !== undefined) { // 충전 경과 시간 필드가 있다면
+        if (z.timeElapsed !== undefined) {
           desc1 = `${z.timeElapsed}분 경과`;
           desc2 = `${z.battery}% 진행중`;
-        } else { // 필드가 없다면 기본값
+        } else {
           desc1 = `${z.battery}% 진행중`;
         }
       } else if (z.status === "대기중") {
-        stateClass = "waiting";
         desc1 = "이 구역에 차량이";
         desc2 = "인식되었습니다.";
       } else if (z.status === "충전가능") {
-        stateClass = "available";
-        if (z.lastUsedHoursAgo !== undefined) { // 마지막 사용 시간 필드가 있다면
+        if (z.lastUsedHoursAgo !== undefined) {
           desc1 = `${z.lastUsedHoursAgo}시간 전 사용`;
-        } else { // 필드가 없다면 기본값
-          // desc1 = "사용 기록 없음"; // 필요시 기본 메시지
         }
       }
 
-      div.className = `zone-box ${stateClass}`;
+      // 사진2와 유사한 레이아웃을 위해 <h5> 내부 구조 변경
       div.innerHTML = `
-        <h5>구역${z.zone} ${statusIcon(stateClass)} ${z.status}</h5>
-        <p>${desc1 || ""}</p> <p>${desc2 || ""}</p> `;
-      wrapper.appendChild(div);
+        <h5>구역${z.zone}</h5>
+        <h5 class="status-line">${z.status} ${statusIcon(getZoneStateClass(z.status, z.charging))}</h5>
+        <p>${desc1 || ""}</p>
+        <p>${desc2 || ""}</p>
+      `;
+      colDiv.appendChild(div);
+      wrapper.appendChild(colDiv);
     });
   } catch (error) {
     console.error("실시간 데이터를 불러오는 중 오류 발생:", error);
@@ -59,10 +63,18 @@ async function loadRealTimeData() {
   }
 }
 
-function statusIcon(state) {
-  if (state === "charging") return "⚡";
-  if (state === "available") return "🔌";
-  if (state === "waiting") return "⏳";
+// 상태에 따라 CSS 클래스를 반환하는 함수 (중복 로직 제거)
+function getZoneStateClass(status, charging) {
+    if (charging) return "charging";
+    if (status === "충전가능") return "available";
+    if (status === "대기중") return "waiting";
+    return ""; // 기본값
+}
+
+function statusIcon(stateClass) { // stateClass를 인수로 받도록 변경
+  if (stateClass === "charging") return "⚡";
+  if (stateClass === "available") return "🔌";
+  if (stateClass === "waiting") return "⏳";
   return "";
 }
 

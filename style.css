@@ -1,4 +1,3 @@
-
 body {
   font-family: 'Noto Sans KR', sans-serif;
   background-color: #fff;
@@ -18,14 +17,34 @@ body {
   padding: 16px;
   margin-bottom: 12px;
   border: 1.5px solid #e0e0e0;
+  /* 사진2와 유사한 그리드 박스 스타일링 */
+  height: 200px; /* 각 박스의 고정 높이 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 내용의 상하 배치 */
+  align-items: flex-start; /* 텍스트를 왼쪽 정렬 */
 }
 .zone-box h5 {
   font-weight: 700;
   font-size: 16px;
+  margin-bottom: 4px; /* 기존 h5 마진 조정 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  width: 100%; /* 너비 100%로 설정 */
+}
+.zone-box h5:first-child { /* 구역 번호 */
+    font-size: 18px; /* 구역 번호 폰트 크기 키움 */
+    margin-bottom: 15px; /* 아래 간격 추가 */
+}
+.zone-box .status-line { /* 상태 텍스트 (충전중, 충전가능) */
+    font-size: 20px; /* 상태 텍스트 폰트 크기 키움 */
+    font-weight: 700;
+    margin-bottom: 25px; /* 아래 간격 추가 */
 }
 .zone-box p {
   margin: 0;
   font-size: 14px;
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  width: 100%; /* 너비 100%로 설정 */
 }
 .charging {
   background-color: #f7f7f7;
