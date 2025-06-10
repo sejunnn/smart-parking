@@ -1,115 +1,114 @@
 /* style.css */
 
 body {
-  font-family: 'Noto Sans KR', sans-serif; /* Pretendard 폰트 대신 Noto Sans KR 유지 */
-  background-color: #fff;
-  color: #111;
+  font-family: 'Pretendard', sans-serif;
+  background-color: white;
+  color: #1a1a1a;
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* 상단 정렬 */
+  align-items: flex-start; /* 상단 정렬 유지 */
   min-height: 100vh;
 }
 
 .container {
-  max-width: 414px; /* Figma 코드의 너비(414px)에 더 가깝게 조정 */
+  max-width: 414px;
   width: 100%;
-  padding: 20px 20px 0 20px; /* 맨 위에서 "한양 전기차 충전소"까지의 마진 조절 */
-  box-sizing: border-box; /* 패딩과 보더를 너비에 포함 */
+  padding: 20px 20px 0 20px; /* 맨 위에서 "한양 전기차 충전소"까지의 마진 조절 (유지) */
+  box-sizing: border-box;
   margin-top: 0;
 }
 
 .header {
   padding-bottom: 0; /* padding-bottom 0 유지 */
-  border-bottom: none; /* 하단 border 제거 */
+  border-bottom: none;
   margin-bottom: 0; /* header의 하단 마진 0 유지 */
 }
 
 .brand {
-  color: #2A55E5; /* Figma 코드에서 "한양 전기차 충전소" 색상 (이전 요청에 따라) */
-  font-weight: 600; /* Figma 코드에서 "한양 전기차 충전소" 폰트 굵기 (이전 요청에 따라) */
-  font-size: 15px; /* Figma 코드에서 "한양 전기차 충전소" 폰트 크기 (이전 요청에 따라) */
+  color: #003FD1;
+  font-weight: 700;
+  font-size: 20px;
   line-height: 30px;
   margin-bottom: 5px;
   display: block;
-  text-align: left; /* 왼쪽 정렬 */
+  text-align: left;
 }
 
 .d-flex {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end; /* 제목과 시간 하단 정렬 */
+  align-items: flex-end;
 }
 
 h2 {
-  color: black; /* Figma 코드에서 "실시간 충전현황" 색상 (이전 요청에 따라) */
-  font-size: 32px; /* Figma 코드에서 "실시간 충전현황" 폰트 크기 (이전 요청에 따라) */
+  color: black;
+  font-size: 32px;
   font-weight: 700;
   line-height: 48px;
   margin-top: 0;
-  margin-bottom: 5px; /* "실시간 충전현황"과 구역 박스 사이의 마진 조절 (이 값을 더 줄이려면 0px로 변경) */
+  margin-bottom: 0px; /* ⭐ 이 값을 10px에서 5px로 줄였습니다. 더 줄이려면 0px로 변경하세요. */
 }
 
 .timestamp {
-  font-size: 13px; /* Figma 코드에서 "오늘 18:43 기준" 폰트 크기 (이전 요청에 따라) */
-  color: #999; /* Figma 코드에서 "오늘 18:43 기준" 색상 (이전 요청에 따라) */
-  font-family: 'Noto Sans KR', sans-serif;
+  color: #808080;
+  font-size: 16px;
+  font-family: 'Pretendard', sans-serif;
   font-weight: 500;
   line-height: 24px;
   display: flex;
   align-items: center;
 }
-
+.timestamp a .refresh-icon {
+  width: 18px; /* SVG 아이콘의 너비 조절 */
+  height: 18px; /* SVG 아이콘의 높이 조절 */
+  vertical-align: middle; /* 텍스트와 세로 정렬 */
+  margin-left: 5px; /* 텍스트와 간격 */
+}
 .timestamp a {
   text-decoration: none;
-  color: inherit;
+  color: inherit; /* 기본 색상 유지 */
   margin-left: 5px;
-  font-size: 18px; /* 아이콘 크기 조정 */
+  /* font-size: 18px; 이모지일 때 필요했던 속성이므로, SVG로 대체 시 제거해도 됨 */
   line-height: 1;
+  display: flex; /* 내부 요소 (이미지) 정렬을 위해 flex 사용 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 (필요 시) */
 }
-
-/* 새로고침 아이콘 스타일 */
-.refresh-icon {
-    width: 18px; /* 아이콘 너비 조정 */
-    height: 18px; /* 아이콘 높이 조정 */
-    vertical-align: middle; /* 텍스트와 세로 정렬 */
-    margin-left: 5px; /* 텍스트와의 간격 */
-}
-
 .zone-wrapper {
-  margin-top: 0;
+  margin-top: 0; /* 유지 */
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin-left: -8px; /* 그리드 간격 조정 (col-6의 패딩과 상쇄) */
+  margin-left: -8px;
   margin-right: -8px;
 }
 
-.col-6 { /* Bootstrap col-6 역할을 하는 부분 */
+.col-6 {
   flex: 0 0 auto;
   width: 50%;
-  padding-left: 8px; /* 각 열의 좌우 패딩 */
+  padding-left: 8px;
   padding-right: 8px;
-  margin-bottom: 16px; /* 각 박스 아래 간격 조정 */
+  margin-bottom: 16px;
   box-sizing: border-box;
 }
 
 .zone-box {
-  border-radius: 28px; /* Figma 코드의 border-radius */
-  padding: 28px; /* Figma 코드의 left/top 값에서 유추한 패딩 */
-  height: 258px; /* Figma 코드의 height */
-  border: 1px #DCDCDC solid; /* 기본 테두리 색상 (충전중과 유사) */
+  background: white;
+  border-radius: 28px;
+  border: 1px #DCDCDC solid;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* 내부 요소 상단 정렬 */
+  justify-content: flex-start;
   align-items: flex-start;
+  height: 258px;
+  padding: 28px;
   box-sizing: border-box;
-  overflow: hidden; /* 내부 내용이 박스를 벗어나지 않도록 */
-  position: relative; /* 내부 absolute 요소의 기준점 */
-  background: white; /* 박스 배경색 */
+  overflow: hidden;
+  position: relative;
 }
 
 .zone-box .zone-number { /* "구역1" 스타일 */
@@ -117,56 +116,51 @@ h2 {
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
-  margin-bottom: 5px; /* 다음 요소와의 간격 */
+  margin-bottom: 5px;
 }
 
 .zone-box .status-text { /* "충전중", "충전가능", "대기중" 스타일 */
   font-size: 26px;
   font-weight: 700;
   line-height: 39px;
-  margin-bottom: auto; /* 아래 설명 텍스트를 바닥에 붙이기 위해 */
+  margin-bottom: auto;
   display: flex;
   align-items: center;
-  gap: 5px; /* 아이콘과 텍스트 간 간격 */
-  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  gap: 5px;
+  white-space: nowrap;
 }
-.zone-box .status-text .icon { /* 아이콘에 대한 추가 스타일 */
-    font-size: 22px; /* Figma의 아이콘 크기에 맞춰 조정 */
+.zone-box .status-text .icon {
+    font-size: 22px;
     line-height: 1;
 }
-/* 이미지 아이콘에 대한 스타일 */
 .zone-box .status-text .icon .status-img-icon {
-    width: 28px; /* 아이콘 너비 조정 */
-    height: 28px; /* 아이콘 높이 조정 */
-    vertical-align: middle; /* 텍스트와 세로 정렬 */
-    margin-left: 5px; /* 텍스트와의 간격 */
-    flex-shrink: 0; /* 아이콘이 줄어들지 않도록 */
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+    margin-left: 5px;
+    flex-shrink: 0;
 }
 
-.zone-box .description-line { /* "53분 경과", "87% 진행중", "12시간 전 사용" 등 */
+.zone-box .description-line {
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
-  color: #9C9C9C; /* 기본 색상 */
+  color: #9C9C9C;
   margin-top: 0;
   margin-bottom: 0;
 }
 .zone-box .description-line:first-of-type {
-    margin-bottom: 5px; /* 첫 번째 설명 줄 아래 간격 */
+    margin-bottom: 5px;
 }
-/* 대기중 메시지 <br/> 처리 (스크립트에서 <br/>이 포함된 채로 들어온다고 가정) */
 .zone-box .description-line br {
-    display: block; /* <br> 태그가 줄바꿈 역할을 제대로 하도록 */
-    margin-top: 0; /* 필요에 따라 조정 */
+    display: block;
+    margin-top: 0;
 }
-
 
 /* 상태별 스타일 오버라이드 */
-
-/* 충전중 (Charging) */
 .charging {
-  border-color: #DCDCDC; /* Figma 충전중 박스 테두리 */
-  color: #9C9C9C; /* Figma 충전중 기본 텍스트 색상 */
+  border-color: #DCDCDC;
+  color: #9C9C9C;
 }
 .charging .zone-number {
   color: #9C9C9C;
@@ -174,17 +168,13 @@ h2 {
 .charging .status-text {
   color: #9C9C9C;
 }
-.charging .status-text .icon .status-img-icon {
-  /* 아이콘 파일 자체에 그라데이션이 적용되어야 합니다. */
-}
 .charging .description-line {
   color: #9C9C9C;
 }
 
-/* 충전가능 (Available) */
 .available {
-  border-color: #467EFF; /* Figma 충전가능 박스 테두리 */
-  color: #003FD1; /* Figma 충전가능 기본 텍스트 색상 */
+  border-color: #467EFF;
+  color: #003FD1;
 }
 .available .zone-number {
   color: #003FD1;
@@ -192,26 +182,19 @@ h2 {
 .available .status-text {
   color: #003FD1;
 }
-.available .status-text .icon .status-img-icon {
-  /* 아이콘 파일 자체의 색상에 따라 달라집니다. */
-}
 .available .description-line {
   color: #003FD1;
 }
 
-/* 대기중 (Waiting) */
 .waiting {
-  border-color: #F7BD72; /* Figma 대기중 박스 테두리 */
-  color: #F7BD72; /* Figma 대기중 기본 텍스트 색상 */
+  border-color: #F7BD72;
+  color: #F7BD72;
 }
 .waiting .zone-number {
   color: #F7BD72;
 }
 .waiting .status-text {
   color: #F7BD72;
-}
-.waiting .status-text .icon .status-img-icon {
-  /* 대기중 아이콘 파일이 있다면 여기에 스타일 추가 */
 }
 .waiting .description-line {
   color: #F7BD72;
