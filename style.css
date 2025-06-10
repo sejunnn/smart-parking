@@ -48,7 +48,7 @@ h2 {
   font-weight: 700;
   line-height: 48px;
   margin-top: 0;
-  margin-bottom: 5px; /* "실시간 충전현황"과 구역 박스 사이의 마진 조절 (이 값을 0px로 변경 가능) */
+  margin-bottom: 10px; /* "실시간 충전현황"과 구역 박스 사이의 마진 조절 (이 값을 0px로 변경 가능) */
 }
 
 .timestamp {
