@@ -2,41 +2,23 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>스마트 충전소 현황</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>실시간 충전현황</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="container">
-    <div class="title">
-      <h1>충전소 현황</h1>
-      <img src="image.svg" id="refreshBtn" alt="refresh" class="refresh-icon"/>
+  <div class="container py-3" style="max-width:480px">
+    <div class="header text-start">
+      <p class="brand">한양 전기차 충전소</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="fw-bold">실시간 충전현황</h2>
+        <span class="timestamp">오늘 <span id="time-now">--:--</span> 기준 🔄</span>
+      </div>
     </div>
-    <div class="zones">
-      <div class="zone" id="zone-1">
-        <h2>존 1</h2>
-        <p class="status">상태: 없음</p>
-        <p class="battery">배터리: -</p>
-        <img class="icon" style="display: none;" />
-      </div>
-      <div class="zone" id="zone-2">
-        <h2>존 2</h2>
-        <p class="status">상태: 없음</p>
-        <p class="battery">배터리: -</p>
-        <img class="icon" style="display: none;" />
-      </div>
-      <div class="zone" id="zone-3">
-        <h2>존 3</h2>
-        <p class="status">상태: 없음</p>
-        <p class="battery">배터리: -</p>
-        <img class="icon" style="display: none;" />
-      </div>
-      <div class="zone" id="zone-4">
-        <h2>존 4</h2>
-        <p class="status">상태: 없음</p>
-        <p class="battery">배터리: -</p>
-        <img class="icon" style="display: none;" />
-      </div>
+    <div class="zone-wrapper mt-3">
+      <!-- 구역 정보는 JS로 삽입 -->
     </div>
   </div>
   <script src="script.js"></script>
