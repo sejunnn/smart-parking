@@ -1,0 +1,8 @@
+{
+  "zones": [
+    { "zone": 1, "status": "충전중", "battery": 87 },
+    { "zone": 2, "status": "대기중", "battery": 0 },
+    { "zone": 3, "status": "비어있음", "battery": 0 },
+    { "zone": 4, "status": "비어있음", "battery": 0 }
+  ]
+}
