@@ -9,23 +9,24 @@
     },
     {
       "zone": 2,
-      "status": "대기중",
-      "battery": 42,
-      "charging": false
+      "status": "충전중",
+      "battery": 60,
+      "charging": true,
+      "timeElapsed": 80
     },
     {
       "zone": 3,
-      "status": "충전가능",
-      "battery": 0,
-      "charging": false,
-      "lastUsedHoursAgo": 6
+      "status": "충전중",
+      "battery": 76,
+      "charging": true,
+      "timeElapsed": 11
     },
     {
       "zone": 4,
       "status": "충전중",
-      "battery": 88,
+      "battery": 10,
       "charging": true,
-      "timeElapsed": 120
+      "timeElapsed": 20
     }
   ]
 }
