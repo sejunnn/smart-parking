@@ -48,7 +48,7 @@ h2 {
   font-weight: 700;
   line-height: 48px;
   margin-top: 0;
-  margin-bottom: 5px; /* ⭐ 이 값을 10px에서 5px로 줄였습니다. 더 줄이려면 0px로 변경하세요. */
+  margin-bottom: 0px; /* ⭐ 이 값을 10px에서 5px로 줄였습니다. 더 줄이려면 0px로 변경하세요. */
 }
 
 .timestamp {
