@@ -1,6 +1,6 @@
 async function loadStatus() {
   try {
-    const res = await fetch('https://raw.githubusercontent.com/your-username/smart-parking/main/status.json');
+    const res = await fetch('https://raw.githubusercontent.com/sejunnn/smart-parking/main/status.json');
     const data = await res.json();
 
     const container = document.getElementById("status-container");
