@@ -1,10 +1,15 @@
-[📄 사용법 안내]
+[📄 사용법 안내 - 향상된 버전]
 
-1. 이 웹사이트는 라즈베리파이에서 주기적으로 GitHub에 업로드한 status.json 파일을 기반으로 충전소 상태를 보여줍니다.
+1. 이 웹사이트는 Bootstrap으로 디자인을 개선했고, 충전 상태에 따라 색상이 달라집니다.
 
-2. 'script.js'의 fetch 주소를 본인의 GitHub 주소에 맞게 수정하세요:
-   https://raw.githubusercontent.com/your-username/smart-parking/main/status.json
+2. script.js에서 GitHub 주소는 다음처럼 설정되어 있습니다:
+   https://raw.githubusercontent.com/sejunnn/smart-parking/main/status.json
 
-3. GitHub Pages에 업로드하면 누구나 모바일로 확인할 수 있습니다.
+3. 충전 상태별 색상:
+   - 충전중: 초록색(success)
+   - 대기중: 노란색(warning)
+   - 비어있음: 회색(secondary)
 
-4. 디자인은 style.css를 수정하여 꾸밀 수 있습니다.
+4. status.json 형식에 "charging": true 값이 있을 경우 '⚡ 충전 중입니다' 문구도 표시됩니다.
+
+5. 향후 디자인은 style.css 또는 Bootstrap 클래스로 꾸밀 수 있습니다.

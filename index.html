@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>충전소 현황</title>
+  <title>전기차 충전소 현황</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <h1>전기차 충전소 현황</h1>
-  <div id="status-container">로딩 중...</div>
-  <footer>마지막 갱신: <span id="last-updated">-</span></footer>
-
+<body class="bg-light">
+  <div class="container py-4">
+    <h1 class="text-center mb-4">🔌 전기차 충전소 실시간 현황</h1>
+    <div class="row" id="status-container">
+      <p class="text-center">로딩 중...</p>
+    </div>
+    <p class="text-center text-muted mt-4">마지막 갱신: <span id="last-updated">-</span></p>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
