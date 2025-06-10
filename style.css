@@ -8,23 +8,22 @@ body {
   padding: 0;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* ⭐ 다시 상단 정렬로 변경 */
+  align-items: flex-start;
   min-height: 100vh;
 }
 
 .container {
   max-width: 414px;
   width: 100%;
-  /* padding: 0 20px; 이전과 동일 */
-  padding: 20px 20px 0 20px; /* ⭐ 상단 패딩을 줄였습니다. (예: 20px) */
+  padding: 20px 20px 0 20px;
   box-sizing: border-box;
-  margin-top: 0; /* 이전에 0으로 설정했으므로 유지 */
+  margin-top: 0;
 }
 
 .header {
   padding-bottom: 20px;
   border-bottom: none;
-  margin-bottom: 5px; /* ⭐ 이 값을 15px에서 5px로 더 많이 줄였습니다. */
+  margin-bottom: 2px; /* ⭐ 이 값을 5px에서 2px로 더 많이 줄였습니다. */
 }
 
 .brand {
