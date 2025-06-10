@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>스마트 주차장 현황</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>실시간 충전현황</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet" />
 </head>
-<body style="max-width:480px;margin:auto;">
-  <div class="header text-center text-white py-4">
-    <h1><i class="fa-solid fa-charging-station me-2"></i>전기차 충전소 현황</h1>
-  </div>
-
-  <div class="container my-4">
-    <div id="status-container" class="d-flex flex-column align-items-center gap-4">
-      <p class="text-center text-muted">로딩 중...</p>
+<body>
+  <div class="container py-3" style="max-width:480px">
+    <div class="header text-start">
+      <p class="brand">한양 전기차 충전소</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="fw-bold">실시간 충전현황</h2>
+        <span class="timestamp">오늘 <span id="time-now">--:--</span> 기준 🔄</span>
+      </div>
     </div>
-    <p class="text-center text-muted mt-4">마지막 갱신: <span id="last-updated">-</span></p>
+    <div class="zone-wrapper mt-3">
+      <!-- 구역 정보는 JS로 삽입 -->
+    </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
