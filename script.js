@@ -75,10 +75,10 @@ function getZoneStateClass(status, charging) {
 // 이모지 대신 이미지 태그를 반환하도록 수정
 function statusIcon(stateClass) {
   if (stateClass === "charging") {
-    return '<img src="images/cg.png" alt="충전중" class="status-img-icon">';
+    return '<img src="images/cg.svg" alt="충전중" class="status-img-icon">';
   }
   if (stateClass === "available") {
-    return '<img src="images/co.png" alt="충전가능" class="status-img-icon">';
+    return '<img src="images/co.svg" alt="충전가능" class="status-img-icon">';
   }
   if (stateClass === "waiting") {
     // 대기중 상태에 대한 아이콘 파일이 없다면, 빈 문자열 또는 다른 기본 아이콘을 반환
