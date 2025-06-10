@@ -1,12 +1,448 @@
+/* CSS 변수 정의 - 포스터에서 추출한 색상 팔레트 */
+:root {
+    --primary-turquoise: #2aafbb;
+    --secondary-turquoise: #4ab7c1;
+    --dark-navy: #1b2e46;
+    --light-white: #fcfdfd;
+    --dark-black: #020404;
+    --gradient-bg: linear-gradient(135deg, #2aafbb 0%, #4ab7c1 50%, #2aafbb 100%);
+    --card-shadow: 0 8px 32px rgba(42, 175, 187, 0.2);
+    --card-shadow-hover: 0 12px 48px rgba(42, 175, 187, 0.3);
+}
+
+/* 전체 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--gradient-bg);
+    min-height: 100vh;
+    color: var(--dark-navy);
+    line-height: 1.6;
 }
-.zone-box {
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+
+/* 헤더 스타일 */
+.hero-section {
+    background: var(--gradient-bg);
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
 }
-.zone-box h4 {
-  margin-bottom: 10px;
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.qr-text {
+    font-size: 2.5rem;
+    opacity: 0.9;
+}
+
+.main-text {
+    background: linear-gradient(45deg, #ffffff, #f0f8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+/* 메인 콘텐츠 */
+.main-content {
+    background: rgba(252, 253, 253, 0.95);
+    backdrop-filter: blur(20px);
+    position: relative;
+    z-index: 1;
+}
+
+/* 현황 요약 섹션 */
+.status-summary {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(42, 175, 187, 0.1);
+}
+
+.summary-card {
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+    background: var(--light-white);
+    border: 2px solid rgba(42, 175, 187, 0.1);
+    transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--primary-turquoise);
+}
+
+.summary-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--primary-turquoise);
+}
+
+.summary-card.available .summary-icon {
+    color: #28a745;
+}
+
+.summary-card.charging .summary-icon {
+    color: #ffc107;
+    animation: pulse 2s infinite;
+}
+
+.summary-card.offline .summary-icon {
+    color: #dc3545;
+}
+
+.summary-card h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark-navy);
+    margin-bottom: 5px;
+}
+
+.summary-card p {
+    font-size: 1rem;
+    color: var(--dark-navy);
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* 섹션 제목 */
+.section-title {
+    color: var(--dark-navy);
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* 충전소 카드 */
+.station-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.station-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary-turquoise);
+}
+
+.station-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--primary-turquoise);
+}
+
+.station-card.charging {
+    border-color: #ffc107;
+    animation: charging-pulse 2s infinite;
+}
+
+.station-card.charging::before {
+    background: #ffc107;
+}
+
+.station-card.available::before {
+    background: #28a745;
+}
+
+.station-card.offline::before {
+    background: #dc3545;
+}
+
+.station-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.station-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark-navy);
+    margin: 0;
+}
+
+.status-badge {
+    padding: 6px 15px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.available {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-badge.charging {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.status-badge.offline {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.station-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.battery-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.battery-icon {
+    font-size: 1.5rem;
+    color: var(--primary-turquoise);
+}
+
+.battery-level {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark-navy);
+}
+
+.time-info {
+    font-size: 0.9rem;
+    color: var(--dark-navy);
+    opacity: 0.7;
+}
+
+/* QR 섹션 */
+.qr-section {
+    background: white;
+    border-radius: 20px;
+    padding: 50px 30px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(42, 175, 187, 0.1);
+}
+
+.qr-phone-mockup {
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.phone-screen {
+    width: 250px;
+    height: 400px;
+    background: var(--light-white);
+    border-radius: 30px;
+    border: 8px solid var(--dark-navy);
+    padding: 30px 20px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+}
+
+.phone-screen::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--dark-navy);
+    border-radius: 2px;
+}
+
+.phone-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.phone-title {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark-navy);
+    margin-bottom: 5px;
+}
+
+.phone-subtitle {
+    font-size: 0.9rem;
+    color: var(--primary-turquoise);
+    font-weight: 500;
+}
+
+.qr-placeholder {
+    width: 150px;
+    height: 150px;
+    border: 3px dashed var(--primary-turquoise);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    background: rgba(42, 175, 187, 0.05);
+}
+
+.qr-icon {
+    font-size: 4rem;
+    color: var(--primary-turquoise);
+    opacity: 0.7;
+}
+
+.phone-text {
+    font-size: 0.9rem;
+    color: var(--dark-navy);
+    opacity: 0.8;
+    margin: 0;
+}
+
+.qr-description h3 {
+    color: var(--dark-navy);
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 1.4;
+}
+
+/* 푸터 */
+.footer {
+    background: var(--dark-navy);
+    color: white;
+    margin-top: 50px;
+}
+
+/* 애니메이션 */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes charging-pulse {
+    0%, 100% { 
+        box-shadow: var(--card-shadow);
+    }
+    50% { 
+        box-shadow: 0 8px 32px rgba(255, 193, 7, 0.3);
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .qr-text {
+        font-size: 1.8rem;
+    }
+
+    .phone-screen {
+        width: 200px;
+        height: 320px;
+        padding: 25px 15px;
+    }
+
+    .qr-placeholder {
+        width: 120px;
+        height: 120px;
+    }
+
+    .qr-icon {
+        font-size: 3rem;
+    }
+
+    .status-summary {
+        padding: 20px;
+    }
+
+    .summary-card {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .summary-card h3 {
+        font-size: 2rem;
+    }
+
+    .station-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .qr-text {
+        font-size: 1.5rem;
+    }
+
+    .summary-card h3 {
+        font-size: 1.8rem;
+    }
+
+    .summary-icon {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
 }

@@ -1,20 +1,119 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>전기차 충전소 현황</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스마트주차장 - 실시간 충전현황</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="improved_style.css">
 </head>
-<body class="bg-light">
-  <div class="container py-4">
-    <h1 class="text-center mb-4">🔌 전기차 충전소 실시간 현황</h1>
-    <div class="row" id="status-container">
-      <p class="text-center">로딩 중...</p>
-    </div>
-    <p class="text-center text-muted mt-4">마지막 갱신: <span id="last-updated">-</span></p>
-  </div>
-  <script src="script.js"></script>
+<body>
+    <!-- 헤더 섹션 -->
+    <header class="hero-section">
+        <div class="container">
+            <div class="text-center text-white py-5">
+                <div class="hero-badge mb-3">스마트주차장</div>
+                <h1 class="hero-title mb-3">
+                    <span class="qr-text">QR코드로</span><br>
+                    <span class="main-text">태그해주세요</span>
+                </h1>
+                <p class="hero-subtitle">실시간 전기차 충전현황을 확인하세요</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <div class="container py-5">
+            <!-- 현황 요약 -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="status-summary">
+                        <div class="row text-center">
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="summary-card">
+                                    <i class="fas fa-charging-station summary-icon"></i>
+                                    <h3 id="total-stations">4</h3>
+                                    <p>총 충전소</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="summary-card available">
+                                    <i class="fas fa-check-circle summary-icon"></i>
+                                    <h3 id="available-stations">0</h3>
+                                    <p>이용 가능</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="summary-card charging">
+                                    <i class="fas fa-bolt summary-icon"></i>
+                                    <h3 id="charging-stations">0</h3>
+                                    <p>충전 중</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="summary-card offline">
+                                    <i class="fas fa-exclamation-triangle summary-icon"></i>
+                                    <h3 id="offline-stations">0</h3>
+                                    <p>점검 중</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 충전소 현황 -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 class="section-title mb-4">
+                        <i class="fas fa-map-marker-alt me-2"></i>충전소 현황
+                    </h2>
+                    <div class="row" id="charging-stations-container">
+                        <!-- 충전소 카드들이 여기에 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR 코드 섹션 -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="qr-section">
+                        <div class="text-center">
+                            <div class="qr-phone-mockup">
+                                <div class="phone-screen">
+                                    <div class="phone-header">
+                                        <span class="phone-title">스마트 주차장</span>
+                                        <span class="phone-subtitle">충전 현황</span>
+                                    </div>
+                                    <div class="qr-placeholder">
+                                        <i class="fas fa-qrcode qr-icon"></i>
+                                    </div>
+                                    <p class="phone-text">카메라로 촬영해보세요</p>
+                                </div>
+                            </div>
+                            <div class="qr-description mt-4">
+                                <h3>스마트폰으로 QR 코드를 스캔하여<br>웹에서 충전현황을 확인하세요</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center py-4">
+                <p class="mb-0">&copy; 2025 스마트주차장 프로젝트. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="improved_script.js"></script>
 </body>
 </html>
