@@ -62,5 +62,13 @@ function statusIcon(state) {
 // 초기 호출
 updateTime();
 loadRealTimeData(); // 이제 loadMockData() 대신 이 함수가 호출됩니다.
+
+// 새로고침 버튼 이벤트 리스너 추가
+document.getElementById("refresh-button").addEventListener("click", function(event) {
+  event.preventDefault(); // 기본 링크 동작 방지
+  updateTime(); // 시간 업데이트
+  loadRealTimeData(); // 데이터 새로고침
+});
+
 // 데이터를 주기적으로 업데이트하려면 다음 줄의 주석을 해제하세요.
 // setInterval(loadRealTimeData, 30000); // 예: 30초마다 업데이트
