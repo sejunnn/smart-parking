@@ -2,10 +2,10 @@
   "zones": [
     {
       "zone": 1,
-      "status": "충전가능",
-      "battery": 0,
-      "charging": false,
-      "lastUsedHoursAgo": 6
+      "status": "충전중",
+      "battery": 62,
+      "charging": true,
+      "lastUsedHoursAgo": 0
     },
     {
       "zone": 2,
@@ -19,11 +19,11 @@
       "status": "충전가능",
       "battery": 0,
       "charging": false,
-      "lastUsedHoursAgo": 6
+      "lastUsedHoursAgo": 12
     },
     {
       "zone": 4,
-      "status": "충전가능",
+      "status": "대기중",
       "battery": 0,
       "charging": false,
       "lastUsedHoursAgo": 6
