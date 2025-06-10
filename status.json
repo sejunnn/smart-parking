@@ -4,7 +4,8 @@
       "zone": 1,
       "status": "충전중",
       "battery": 76,
-      "charging": true
+      "charging": true,
+      "timeElapsed": 53  // <-- 충전중일 때 추가 (분 단위)
     },
     {
       "zone": 2,
@@ -16,13 +17,15 @@
       "zone": 3,
       "status": "충전가능",
       "battery": 0,
-      "charging": false
+      "charging": false,
+      "lastUsedHoursAgo": 6 // <-- 충전가능일 때 추가 (시간 전)
     },
     {
       "zone": 4,
       "status": "충전중",
       "battery": 88,
-      "charging": true
+      "charging": true,
+      "timeElapsed": 120 // <-- 충전중일 때 추가
     }
   ]
 }

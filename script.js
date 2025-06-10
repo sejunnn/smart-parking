@@ -21,28 +21,35 @@ async function loadRealTimeData() {
     zones.forEach(z => {
       const div = document.createElement("div");
       let stateClass = "";
-      let desc1 = "";
-      let desc2 = "";
+      let desc1 = ""; // 첫 번째 설명줄
+      let desc2 = ""; // 두 번째 설명줄
 
       // status.json의 데이터를 기반으로 상태 및 설명 설정
       if (z.charging) {
         stateClass = "charging";
-        desc1 = `${z.battery}% 진행중`; // 배터리 잔량 표시
-      } else if (z.status === "대기중") { // status.json의 status 값 사용
+        if (z.timeElapsed !== undefined) { // 충전 경과 시간 필드가 있다면
+          desc1 = `${z.timeElapsed}분 경과`;
+          desc2 = `${z.battery}% 진행중`;
+        } else { // 필드가 없다면 기본값
+          desc1 = `${z.battery}% 진행중`;
+        }
+      } else if (z.status === "대기중") {
         stateClass = "waiting";
         desc1 = "이 구역에 차량이";
         desc2 = "인식되었습니다.";
-      } else if (z.status === "충전가능") { // status.json의 status 값 사용
+      } else if (z.status === "충전가능") {
         stateClass = "available";
-        // '사용 시간' 등의 추가 정보가 status.json에 있다면 여기에 추가
+        if (z.lastUsedHoursAgo !== undefined) { // 마지막 사용 시간 필드가 있다면
+          desc1 = `${z.lastUsedHoursAgo}시간 전 사용`;
+        } else { // 필드가 없다면 기본값
+          // desc1 = "사용 기록 없음"; // 필요시 기본 메시지
+        }
       }
 
       div.className = `zone-box ${stateClass}`;
       div.innerHTML = `
         <h5>구역${z.zone} ${statusIcon(stateClass)} ${z.status}</h5>
-        <p>${desc1}</p>
-        <p>${desc2}</p>
-      `;
+        <p>${desc1 || ""}</p> <p>${desc2 || ""}</p> `;
       wrapper.appendChild(div);
     });
   } catch (error) {
@@ -61,7 +68,7 @@ function statusIcon(state) {
 
 // 초기 호출
 updateTime();
-loadRealTimeData(); // 이제 loadMockData() 대신 이 함수가 호출됩니다.
+loadRealTimeData();
 
 // 새로고침 버튼 이벤트 리스너 추가
 document.getElementById("refresh-button").addEventListener("click", function(event) {
