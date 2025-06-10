@@ -14,7 +14,7 @@ async function loadStatus() {
       box.className = "col-md-6 col-lg-4";
       box.innerHTML = `
         <div class="zone-box border border-${color} bg-white">
-          <h4>🚗 구역 ${zone.zone}</h4>
+          <h5>🚗 구역 ${zone.zone}</h5>
           <p><strong>상태:</strong> <span class="text-${color} fw-bold">${zone.status}</span></p>
           <p><strong>배터리:</strong> ${zone.battery}%</p>
           ${zone.charging ? `<p><strong>⚡ 충전 중입니다</strong></p>` : ""}
