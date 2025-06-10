@@ -1,3 +1,5 @@
+// script.js
+
 function updateTime() {
   const now = new Date();
   const hour = now.getHours().toString().padStart(2, '0');
@@ -45,6 +47,7 @@ async function loadRealTimeData() {
       }
 
       // Figma 코드의 레이아웃과 유사하도록 HTML 구조 변경
+      // 아이콘을 위한 <span> 태그 안에 <img>를 넣도록 변경
       div.innerHTML = `
         <h5 class="zone-number">구역${z.zone}</h5>
         <h5 class="status-text">${z.status} <span class="icon">${statusIcon(getZoneStateClass(z.status, z.charging))}</span></h5>
@@ -69,11 +72,19 @@ function getZoneStateClass(status, charging) {
     return "";
 }
 
+// 이모지 대신 이미지 태그를 반환하도록 수정
 function statusIcon(stateClass) {
-  if (stateClass === "charging") return "⚡";
-  if (stateClass === "available") return "🔌";
-  if (stateClass === "waiting") return "⏳";
-  return "";
+  if (stateClass === "charging") {
+    return '<img src="images/cg.png" alt="충전중" class="status-img-icon">';
+  }
+  if (stateClass === "available") {
+    return '<img src="images/co.png" alt="충전가능" class="status-img-icon">';
+  }
+  if (stateClass === "waiting") {
+    // 대기중 상태에 대한 아이콘 파일이 없다면, 빈 문자열 또는 다른 기본 아이콘을 반환
+    return ''; // 또는 '<img src="images/waiting.png" alt="대기중" class="status-img-icon">';
+  }
+  return '';
 }
 
 // 초기 호출
