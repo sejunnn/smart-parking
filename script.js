@@ -18,11 +18,11 @@ async function loadRealTimeData() {
     const zones = data.zones;
 
     const wrapper = document.querySelector(".zone-wrapper");
-    wrapper.innerHTML = ""; // 기존 목업 데이터 지우기
+    wrapper.innerHTML = ""; // 기존 내용 지우기
 
     zones.forEach(z => {
       const colDiv = document.createElement("div");
-      colDiv.className = "col-6";
+      colDiv.className = "col-6"; // 각 구역 박스를 col-6으로 감쌈
 
       const div = document.createElement("div");
       div.className = "zone-box " + getZoneStateClass(z.status, z.charging);
@@ -31,23 +31,25 @@ async function loadRealTimeData() {
       let desc2 = "";
 
       if (z.charging) {
+        // 충전중 상태
         if (z.timeElapsed !== undefined) {
           desc1 = `${z.timeElapsed}분 경과`;
           desc2 = `${z.battery}% 진행중`;
         } else {
+          // timeElapsed가 없는 경우 battery만 표시
           desc1 = `${z.battery}% 진행중`;
         }
       } else if (z.status === "대기중") {
+        // 대기중 상태
         desc1 = "이 구역에 차량이";
         desc2 = "인식되었습니다.";
       } else if (z.status === "충전가능") {
+        // 충전가능 상태
         if (z.lastUsedHoursAgo !== undefined) {
           desc1 = `${z.lastUsedHoursAgo}시간 전 사용`;
         }
       }
 
-      // Figma 코드의 레이아웃과 유사하도록 HTML 구조 변경
-      // 아이콘을 위한 <span> 태그 안에 <img>를 넣도록 변경
       div.innerHTML = `
         <h5 class="zone-number">구역${z.zone}</h5>
         <h5 class="status-text">${z.status} <span class="icon">${statusIcon(getZoneStateClass(z.status, z.charging))}</span></h5>
@@ -72,7 +74,7 @@ function getZoneStateClass(status, charging) {
     return "";
 }
 
-// 이모지 대신 이미지 태그를 반환하도록 수정
+// SVG 이미지 태그를 반환하도록 수정
 function statusIcon(stateClass) {
   if (stateClass === "charging") {
     return '<img src="images/cg.svg" alt="충전중" class="status-img-icon">';
@@ -81,8 +83,8 @@ function statusIcon(stateClass) {
     return '<img src="images/co.svg" alt="충전가능" class="status-img-icon">';
   }
   if (stateClass === "waiting") {
-    // 대기중 상태에 대한 아이콘 파일이 없다면, 빈 문자열 또는 다른 기본 아이콘을 반환
-    return ''; // 또는 '<img src="images/waiting.png" alt="대기중" class="status-img-icon">';
+    // 대기중 아이콘이 필요하면 images/waiting.svg 등을 추가하고 경로를 지정
+    return ''; // 현재는 대기중 아이콘 없음
   }
   return '';
 }
@@ -93,7 +95,7 @@ loadRealTimeData();
 
 // 새로고침 버튼 이벤트 리스너 추가
 document.getElementById("refresh-button").addEventListener("click", function(event) {
-  event.preventDefault();
+  event.preventDefault(); // 기본 새로고침 동작 방지
   updateTime();
   loadRealTimeData();
 });

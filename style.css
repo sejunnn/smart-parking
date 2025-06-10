@@ -1,7 +1,7 @@
 /* style.css */
 
 body {
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'Pretendard', sans-serif; /* index.html에 맞춰 Pretendard로 변경 */
   background-color: white;
   color: #1a1a1a;
   margin: 0;
@@ -15,7 +15,7 @@ body {
 .container {
   max-width: 414px;
   width: 100%;
-  padding: 20px 20px 0 20px; /* 맨 위에서 "한양 전기차 충전소"까지의 마진 조절 (유지) */
+  padding: 20px 20px 0 20px; /* 맨 위에서 "한양 전기차 충전소"까지의 마진 조절 */
   box-sizing: border-box;
   margin-top: 0;
 }
@@ -27,7 +27,7 @@ body {
 }
 
 .brand {
-  color: #003FD1;
+  color: #003FD1; /* Figma 색상 (이전 요청에 따라) */
   font-weight: 700;
   font-size: 20px;
   line-height: 30px;
@@ -48,7 +48,7 @@ h2 {
   font-weight: 700;
   line-height: 48px;
   margin-top: 0;
-  margin-bottom: 0px; /* ⭐ 이 값을 10px에서 5px로 줄였습니다. 더 줄이려면 0px로 변경하세요. */
+  margin-bottom: 5px; /* "실시간 충전현황"과 구역 박스 사이의 마진 조절 (이 값을 0px로 변경 가능) */
 }
 
 .timestamp {
@@ -60,39 +60,42 @@ h2 {
   display: flex;
   align-items: center;
 }
-.timestamp a .refresh-icon {
+
+/* 새로고침 아이콘 스타일 (<a> 태그 내의 <img>에 직접 적용) */
+.refresh-icon {
   width: 18px; /* SVG 아이콘의 너비 조절 */
   height: 18px; /* SVG 아이콘의 높이 조절 */
   vertical-align: middle; /* 텍스트와 세로 정렬 */
   margin-left: 5px; /* 텍스트와 간격 */
 }
-.timestamp a {
+
+.timestamp a { /* 새로고침 버튼 링크 자체의 스타일 (필요 시) */
   text-decoration: none;
-  color: inherit; /* 기본 색상 유지 */
-  margin-left: 5px;
-  /* font-size: 18px; 이모지일 때 필요했던 속성이므로, SVG로 대체 시 제거해도 됨 */
+  color: inherit;
+  /* margin-left는 refresh-icon에 이미 주어졌으므로 여기서 제거 */
   line-height: 1;
-  display: flex; /* 내부 요소 (이미지) 정렬을 위해 flex 사용 */
+  display: flex; /* 내부 아이콘 정렬을 위해 flex 사용 */
   align-items: center; /* 수직 중앙 정렬 */
-  justify-content: center; /* 수평 중앙 정렬 (필요 시) */
 }
+
 .zone-wrapper {
-  margin-top: 0; /* 유지 */
+  margin-top: 0;
+  /* index.html에 이미 row 클래스가 있으므로 여기서는 display: flex 등을 정의하지 않음 */
 }
 
 .row {
   display: flex;
-  flex-wrap: wrap;
-  margin-left: -8px;
+  flex-wrap: wrap; /* ⭐ 2열 배치를 위해 필수 */
+  margin-left: -8px; /* .col-6의 padding과 상쇄하여 전체 너비 조정 */
   margin-right: -8px;
 }
 
 .col-6 {
-  flex: 0 0 auto;
-  width: 50%;
-  padding-left: 8px;
+  flex: 0 0 auto; /* ⭐ Flex 아이템 크기 조절 방지 */
+  width: 50%; /* ⭐ 한 줄에 2개씩 배치 */
+  padding-left: 8px; /* 각 열의 좌우 패딩 */
   padding-right: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 16px; /* 각 박스 아래 간격 */
   box-sizing: border-box;
 }
 
@@ -104,8 +107,8 @@ h2 {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 258px;
-  padding: 28px;
+  height: 258px; /* Figma 높이에 맞춰 조정 */
+  padding: 28px; /* Figma 패딩에 맞춰 조정 */
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
@@ -123,17 +126,17 @@ h2 {
   font-size: 26px;
   font-weight: 700;
   line-height: 39px;
-  margin-bottom: auto;
+  margin-bottom: auto; /* 아래 설명 텍스트를 박스 하단에 붙이도록 */
   display: flex;
   align-items: center;
   gap: 5px;
-  white-space: nowrap;
+  white-space: nowrap; /* ⭐ 텍스트가 한 줄에 나오도록 */
 }
 .zone-box .status-text .icon {
-    font-size: 22px;
+    font-size: 22px; /* 이모지 아이콘 크기 (SVG 이미지에는 직접 width/height) */
     line-height: 1;
 }
-.zone-box .status-text .icon .status-img-icon {
+.zone-box .status-text .icon .status-img-icon { /* SVG 이미지 아이콘 스타일 */
     width: 28px;
     height: 28px;
     vertical-align: middle;
