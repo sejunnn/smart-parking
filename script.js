@@ -182,7 +182,7 @@ function getZoneStateClass(status, charging) {
 function statusIcon(stateClass) {
   if (stateClass === "charging") return '<img src="images/cg.svg" alt="충전중" class="status-img-icon">';
   if (stateClass === "available") return '<img src="images/co.svg" alt="충전가능" class="status-img-icon">';
-  if (stateClass === "waiting") return '<img src="images/waiting.svg" alt="대기중" class="status-img-icon">';
+  //if (stateClass === "waiting") return '<img src="images/waiting.svg" alt="대기중" class="status-img-icon">';
   return '';
 }
 
