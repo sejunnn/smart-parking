@@ -1,6 +1,6 @@
 // script.js
 
-// 1. 초기 데이터 (2개 구역으로 축소)
+// 1. 초기 데이터
 const initialZones = [
   {
     "zone": 1,
@@ -19,20 +19,19 @@ const initialZones = [
   }
 ];
 
-// 로컬 스토리지에서 데이터 불러오기 (없으면 초기값 사용)
+// 로컬 스토리지 데이터 로드
 let zonesData = JSON.parse(localStorage.getItem('parkingData')) || initialZones;
 let isAdminMode = false;
 let adminModeClicks = 0;
 const ADMIN_CLICK_THRESHOLD = 5;
 
-// ⭐ 브라우저 탭 간 실시간 통신 채널 생성
+// 실시간 동기화 채널
 const updateChannel = new BroadcastChannel('parking_updates');
 
-// 다른 탭에서 신호가 오면 즉시 화면 업데이트
 updateChannel.onmessage = (event) => {
   if (event.data.type === 'UPDATE_ZONES') {
     zonesData = event.data.payload;
-    renderZones(); // 화면 즉시 갱신
+    renderZones();
   }
 };
 
@@ -44,9 +43,7 @@ function updateTime() {
   if(timeEl) timeEl.textContent = hour + ":" + min;
 }
 
-// 초기 로딩 (status.json 대신 로컬 메모리 우선 사용)
 function loadRealTimeData() {
-  // 영상 촬영용이므로 서버 fetch보다 로컬 데이터 우선 렌더링
   renderZones();
 }
 
@@ -56,31 +53,26 @@ function renderZones() {
   wrapper.innerHTML = "";
 
   zonesData.forEach(z => {
-    // ⭐ 레이아웃: 2개 구역을 한 화면에 꽉 차게 보려면 col-12, 나란히 보려면 col-6 유지
-    // 모바일 뷰 기준 col-6(가로 배치)가 영상에 예쁘게 나옵니다.
     const colDiv = document.createElement("div");
-    colDiv.className = "col-6"; 
+    colDiv.className = "col-6"; // 레이아웃 유지
 
     const div = document.createElement("div");
     div.className = "zone-box " + getZoneStateClass(z.status, z.charging);
     
+    // UI 표시용 텍스트 생성
     let desc1 = "";
     let desc2 = "";
 
     if (z.charging) {
-      if (z.timeElapsed !== undefined) {
-        desc1 = `${z.timeElapsed}분 경과`;
-        desc2 = `${z.battery}% 진행중`;
-      } else {
-        desc1 = `${z.battery}% 진행중`;
-      }
+        // 충전중일 때: 시간과 배터리 표시
+        desc1 = `${z.timeElapsed !== undefined ? z.timeElapsed : 0}분 경과`;
+        desc2 = `${z.battery !== undefined ? z.battery : 0}% 진행중`;
     } else if (z.status === "대기중") {
-      desc1 = "이 구역에 차량이";
-      desc2 = "인식되었습니다.";
+        desc1 = "이 구역에 차량이";
+        desc2 = "인식되었습니다.";
     } else if (z.status === "충전가능") {
-      if (z.lastUsedHoursAgo !== undefined) {
-        desc1 = `${z.lastUsedHoursAgo}시간 전 사용`;
-      }
+        // 충전가능일 때: 몇 시간 전 사용 표시
+        desc1 = `${z.lastUsedHoursAgo !== undefined ? z.lastUsedHoursAgo : 0}시간 전 사용`;
     }
 
     div.innerHTML = `
@@ -90,49 +82,74 @@ function renderZones() {
       <p class="description-line">${desc2 || ""}</p>
     `;
 
-    // 관리자 모드 버튼 렌더링
+    // ⭐ [관리자 모드] 디테일 수정 패널
     if (isAdminMode) {
-        const adminControls = document.createElement("div");
-        adminControls.className = "admin-box-controls mt-2";
-        adminControls.style.display = "flex";
-        adminControls.style.gap = "4px";
-        adminControls.style.flexWrap = "wrap";
-        
-        // 버튼 스타일 소폭 조정 (터치하기 편하게)
-        adminControls.innerHTML = `
-            <button class="btn btn-sm btn-light border-primary text-primary" style="flex:1" data-zone="${z.zone}" data-status="충전가능" data-charging="false">가능</button>
-            <button class="btn btn-sm btn-light border-warning text-warning" style="flex:1" data-zone="${z.zone}" data-status="대기중" data-charging="false">대기</button>
-            <button class="btn btn-sm btn-light border-danger text-danger" style="flex:1" data-zone="${z.zone}" data-status="충전중" data-charging="true">충전</button>
+        const adminPanel = document.createElement("div");
+        adminPanel.className = "mt-3 pt-2 border-top border-secondary";
+        adminPanel.style.fontSize = "12px";
+
+        // 입력 필드 현재값 세팅 (없으면 0)
+        const currentBat = z.battery || 50;
+        const currentTime = z.timeElapsed || 30;
+        const currentAgo = z.lastUsedHoursAgo || 2;
+
+        adminPanel.innerHTML = `
+            <div class="d-flex gap-1 mb-2 align-items-center">
+                <input type="number" class="form-control form-control-sm px-1 inp-bat" placeholder="%" value="${currentBat}" style="width:40px">
+                <span class="text-white">%</span>
+                <input type="number" class="form-control form-control-sm px-1 inp-time" placeholder="분" value="${currentTime}" style="width:40px">
+                <span class="text-white">분</span>
+                <button class="btn btn-sm btn-danger py-0 btn-set-charging" style="font-size:12px; height: 31px;">충전</button>
+            </div>
+
+            <div class="d-flex gap-1 mb-2 align-items-center">
+                <input type="number" class="form-control form-control-sm px-1 inp-ago" placeholder="시간" value="${currentAgo}" style="width:40px">
+                <span class="text-white">전</span>
+                <button class="btn btn-sm btn-primary py-0 btn-set-available flex-grow-1" style="font-size:12px; height: 31px;">가능 적용</button>
+            </div>
+
+            <button class="btn btn-sm btn-warning w-100 py-1 btn-set-waiting" style="font-size:12px;">대기중 (차량인식)</button>
         `;
-        div.appendChild(adminControls);
 
-        adminControls.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const targetZone = parseInt(e.target.dataset.zone);
-                const newStatus = e.target.dataset.status;
-                const newCharging = e.target.dataset.charging === 'true';
+        // 버튼 이벤트 리스너 연결
+        const inpBat = adminPanel.querySelector('.inp-bat');
+        const inpTime = adminPanel.querySelector('.inp-time');
+        const inpAgo = adminPanel.querySelector('.inp-ago');
 
-                // 데이터 업데이트
-                const zoneToUpdate = zonesData.find(zone => zone.zone === targetZone);
-                if (zoneToUpdate) {
-                    zoneToUpdate.status = newStatus;
-                    zoneToUpdate.charging = newCharging;
-                    
-                    // 상태 변경 시 부가 정보 초기화 또는 설정 (시연용 더미 데이터)
-                    if(newCharging) {
-                        zoneToUpdate.battery = 15; // 충전 시작 시 15%로 설정
-                        zoneToUpdate.timeElapsed = 5;
-                    } else {
-                        zoneToUpdate.timeElapsed = undefined;
-                        zoneToUpdate.battery = undefined;
-                        zoneToUpdate.lastUsedHoursAgo = 0;
-                    }
-
-                    // ⭐ 중요: 변경된 데이터를 로컬 스토리지에 저장하고 방송(Broadcast)
-                    saveAndBroadcast(); 
-                }
+        // [충전 버튼] 클릭 시
+        adminPanel.querySelector('.btn-set-charging').addEventListener('click', () => {
+            updateZoneData(z.zone, {
+                status: "충전중",
+                charging: true,
+                battery: parseInt(inpBat.value),
+                timeElapsed: parseInt(inpTime.value),
+                lastUsedHoursAgo: 0
             });
         });
+
+        // [가능 버튼] 클릭 시
+        adminPanel.querySelector('.btn-set-available').addEventListener('click', () => {
+            updateZoneData(z.zone, {
+                status: "충전가능",
+                charging: false,
+                lastUsedHoursAgo: parseInt(inpAgo.value),
+                battery: 0,
+                timeElapsed: 0
+            });
+        });
+
+        // [대기 버튼] 클릭 시
+        adminPanel.querySelector('.btn-set-waiting').addEventListener('click', () => {
+            updateZoneData(z.zone, {
+                status: "대기중",
+                charging: false,
+                lastUsedHoursAgo: 0,
+                battery: 0,
+                timeElapsed: 0
+            });
+        });
+
+        div.appendChild(adminPanel);
     }
 
     colDiv.appendChild(div);
@@ -140,11 +157,19 @@ function renderZones() {
   });
 }
 
-// 데이터를 저장하고 모든 탭에 알리는 함수
+// 데이터 업데이트 및 전파 헬퍼 함수
+function updateZoneData(zoneId, newData) {
+    const target = zonesData.find(z => z.zone === zoneId);
+    if (target) {
+        Object.assign(target, newData);
+        saveAndBroadcast();
+    }
+}
+
 function saveAndBroadcast() {
-    localStorage.setItem('parkingData', JSON.stringify(zonesData)); // 저장
-    renderZones(); // 내 화면 갱신
-    updateChannel.postMessage({ type: 'UPDATE_ZONES', payload: zonesData }); // 다른 탭 갱신
+    localStorage.setItem('parkingData', JSON.stringify(zonesData));
+    renderZones(); 
+    updateChannel.postMessage({ type: 'UPDATE_ZONES', payload: zonesData });
 }
 
 function getZoneStateClass(status, charging) {
@@ -163,32 +188,27 @@ function statusIcon(stateClass) {
 
 updateTime();
 loadRealTimeData();
-setInterval(updateTime, 1000); // 시간은 1초마다 갱신
+setInterval(updateTime, 1000);
 
-// 새로고침 버튼 (데이터 리셋 기능 포함)
 const refreshBtn = document.getElementById("refresh-button");
 if(refreshBtn){
     refreshBtn.addEventListener("click", function(event) {
         event.preventDefault();
-        // 시연 중 데이터 꼬이면 로컬 스토리지 초기화용 (더블 클릭 시 초기화 등으로 응용 가능)
-        updateTime();
         loadRealTimeData();
     });
 }
 
-// 관리자 모드 활성화 로직
+// 관리자 모드 진입 로직
 const adminTrigger = document.getElementById("admin-trigger");
 if(adminTrigger){
     adminTrigger.addEventListener("click", function() {
         adminModeClicks++;
-        console.log("Admin clicks:", adminModeClicks);
-
         if (adminModeClicks >= ADMIN_CLICK_THRESHOLD) {
             isAdminMode = !isAdminMode;
             if (isAdminMode) {
-                alert("🔴 관리자 모드 ON: 버튼을 누르면 다른 탭도 즉시 변경됩니다.");
+                alert("🛠️ 관리자 모드 ON: 상세 수치를 입력하고 버튼을 누르세요.");
             } else {
-                alert("⚪ 관리자 모드 OFF");
+                alert("관리자 모드 OFF");
             }
             renderZones();
             adminModeClicks = 0;
