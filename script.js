@@ -90,7 +90,7 @@ function renderZones() {
 
         // 입력 필드 현재값 세팅 (없으면 0)
         const currentBat = z.battery || 50;
-        const currentTime = z.timeElapsed || 30;
+        const currentTime = z.timeElapsed || 0;
         const currentAgo = z.lastUsedHoursAgo || 2;
 
         adminPanel.innerHTML = `
